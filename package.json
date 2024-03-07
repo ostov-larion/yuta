@@ -19,6 +19,10 @@
     "reactive",
     "framework"
   ],
+  "repository": {
+    "url": "https://github.com/ostov-larion/yuta",
+    "type": "github"
+  },
   "author": "ostov-larion",
   "license": "MIT"
 }
