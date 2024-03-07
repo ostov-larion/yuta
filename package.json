@@ -1,0 +1,24 @@
+{
+  "name": "yuta",
+  "version": "1.0.0",
+  "description": "Small declarative/reactive wrapper for GTK4/Adwaita",
+  "main": "yuta.js",
+  "dependencies": {
+    "node-gtk": "^0.12.1"
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gtk4",
+    "libadwaita",
+    "declarative",
+    "reactive",
+    "framework"
+  ],
+  "author": "ostov-larion",
+  "license": "MIT"
+}
