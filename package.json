@@ -1,6 +1,6 @@
 {
-  "name": "yuta",
-  "version": "1.0.0",
+  "name": "@ostov-larion/yuta",
+  "version": "1.0.1",
   "description": "Small declarative/reactive wrapper for GTK4/Adwaita",
   "main": "yuta.js",
   "dependencies": {

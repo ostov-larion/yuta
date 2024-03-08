@@ -2,6 +2,8 @@ const gi = require("node-gtk");
 const Gtk = gi.require("Gtk", '4.0') 
 const Adw = gi.require("Adw", '1')
 const GLib = gi.require("GLib", '2.0')
+const Gio = gi.require("Gio", "2.0")
+const Gdk = gi.require("Gdk", "4.0")
 
 const App = (id, onActivate) => {
     const loop = GLib.MainLoop.new(null, false)
@@ -28,7 +30,7 @@ const set = new Proxy({}, {
 })
 
 const on = new Proxy({}, {
-    get: (t, event) => listener => obj => (obj.on(event, listener), obj)
+    get: (t, event) => listener => obj => (obj.on(event, () => listener(obj)), obj)
 })
 
 const go = new Proxy({}, {
@@ -69,6 +71,22 @@ const state = value => new Proxy({value, on(fn) {this.listeners.push(fn)}, liste
 
 const style = (...classes) => obj => (classes.forEach(c => obj.addCssClass(c)), obj)
 
+const importCSS = filename => obj => {
+    let provider = Gtk.CssProvider.new()
+    provider.loadFromFile(Gio.File.newForPath(filename))
+    let ctx = Gtk.StyleContext
+    ctx.addProviderForDisplay(Gdk.Display.getDefault(),provider, 1)
+    return obj
+}
+
+const css = str => obj => {
+    let provider = Gtk.CssProvider.new()
+    provider.loadFromString(Gio.File.newForPath(filename))
+    let ctx = Gtk.StyleContext
+    ctx.addProviderForDisplay(Gdk.Display.getDefault(),provider, 1)
+    return obj
+}
+
 const orientation = {
     vertical: Gtk.Orientation.VERTICAL,
     horizontal: Gtk.Orientation.HORIZONTAL
@@ -80,4 +98,4 @@ const quit = ({app, loop}) => () => {
     return false
 }
 
-module.exports = {App, gtk, adw, set, on, go, each, state, bind, style, quit, orientation}
+module.exports = {App, gtk, adw, set, on, go, each, state, bind, style, quit, importCSS, css, orientation, Gio, Gdk}
